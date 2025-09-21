@@ -381,9 +381,9 @@
   <body>
     <audio
       id="id_audio"
-      src="The Rains of Castamere (Red Wedding Version).mp3"
+      src="True.mp3"
     ></audio>
-    <h1>Te regalo esta flor amarilla porque eres mi futuro soñado</h1>
+    <h1>Mi amor, esta es mi flor amarilla para ti peque. Te quiero</h1>
     <div class="sunflower">
       <div class="flower_wrapper">
         <div class="flower_stem"></div>
@@ -428,13 +428,60 @@
     <div class="light light-11"></div>
     <div class="light light-12"></div>
     <button class="flower-btn">CLICK AQUI</button>
-    <script>
-      const floweBtn = document.querySelector(".flower-btn");
-      const audio = document.getElementById("id_audio")
-      floweBtn.onclick = () => {
-        audio.play()
-        audio.volume = 0.5
-      }
-    </script>
+<!-- CONTENEDOR DE FOTOS -->
+<div id="slideshow">
+  <img src="foto1.jpg" alt="Foto 1" class="pos1" />
+  <img src="foto2.jpg" alt="Foto 2" class="pos2" />
+  <img src="foto3.jpg" alt="Foto 3" class="pos3" />
+  <img src="foto4.jpg" alt="Foto 4" class="pos4" />
+</div>
+
+<style>
+  #slideshow img {
+    position: fixed;
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    transition: opacity 2.5s ease; /* transición más lenta */
+    z-index: 2000;
+  }
+
+  /* posiciones distintas para cada foto */
+  .pos1 { top: 20px; left: 20px; }
+  .pos2 { top: 20px; right: 20px; }
+  .pos3 { bottom: 20px; left: 20px; }
+  .pos4 { bottom: 20px; right: 20px; }
+
+  /* foto activa visible */
+  #slideshow img.active {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const floweBtn = document.querySelector(".flower-btn");
+  const audio = document.getElementById("id_audio");
+  const slides = document.querySelectorAll("#slideshow img");
+  let currentIndex = 0;
+  let interval;
+
+  floweBtn.onclick = () => {
+    audio.play();
+    audio.volume = 0.5;
+
+    // iniciar slideshow si aún no ha empezado
+    if (!interval) {
+      slides[currentIndex].classList.add("active");
+      interval = setInterval(() => {
+        slides[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add("active");
+      }, 4000); // cada 4 segundos cambia
+    }
+  };
+</script>
   </body>
 </html>

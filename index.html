@@ -71,16 +71,10 @@
     </style>
   </head>
   <body>
-    <audio
-      id="id_audio"
-      src="The Rains of Castamere (Red Wedding Version).mp3"
-    ></audio>
-
-    <button class="flower-btn">DALE CLICK AQUI AMOR</button>
     <div class="container">
       <h2>
         🔒<br />
-        Ingrese la contraseña
+        Escribe la contraseña amor (pista: aniversario)
       </h2>
       <div class="input-display" id="inputDisplay">••••</div>
       <div class="keypad">
@@ -97,35 +91,69 @@
       </div>
     </div>
 
-    
-    <script>
-      const floweBtn = document.querySelector(".flower-btn");
-      const audio = document.getElementById("id_audio")
-      floweBtn.onclick = () => {
-        audio.play()
-        audio.volume = 0.5
-      }
-    </script>
+    <audio
+      id="id_audio"
+      src="Peque.mp3"
+    ></audio>
 
-    <script>
-      const correctPassword = "150525";
-      const display = document.getElementById("inputDisplay");
-      let input = "";
-      function enterDigit(digit) {
-        if (input.length < 6) {
-          input += digit;
-        }
-        display.textContent = input.padEnd(6, "•");
-        if (input.length === 6) {
-          if (input === correctPassword) {
-            window.location.href = "flower.html"; 
-          } else {
-            alert("Contraseña incorecta, intenta de nuevo");
-            input = "";
-            display.textContent = "••••";
-          }
-        }
+<style>
+  .flower-btn {
+    font-size: 20px;        /* texto más grande */
+    padding: 15px 30px;     /* botón más grande */
+    border: none;
+    border-radius: 12px;    /* bordes redondeados */
+    cursor: pointer;
+    margin-left: 40px;      /* mueve el botón hacia la derecha */
+    background: linear-gradient(45deg, #ff6ec7, #ffa751); /* degradado colorido */
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* sombra */
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .flower-btn:hover {
+    transform: scale(1.1); /* efecto al pasar el ratón */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+  }
+</style>
+
+<button class="flower-btn">Antes de comenzar, dale a este botón pequeña</button>
+
+<script>
+  const floweBtn = document.querySelector(".flower-btn");
+  const audio = document.getElementById("id_audio")
+  floweBtn.onclick = () => {
+    audio.play()
+    audio.volume = 1
+  }
+</script>
+
+
+<script>
+  const correctPassword = "27122024"; // puedes cambiar la longitud
+  const display = document.getElementById("inputDisplay");
+  let input = "";
+
+  // inicializa el display con la cantidad correcta de puntos
+  display.textContent = "•".repeat(correctPassword.length);
+
+  function enterDigit(digit) {
+    if (input.length < correctPassword.length) {
+      input += digit;
+    }
+
+    display.textContent = input.padEnd(correctPassword.length, "•");
+
+    if (input.length === correctPassword.length) {
+      if (input === correctPassword) {
+        window.location.href = "flower.html"; 
+      } else {
+        alert("Contraseña incorrecta peque ooo no te sabes nuestro aniversario");
+        input = "";
+        display.textContent = "•".repeat(correctPassword.length);
       }
-    </script>
-  </body>
-</html>
+    }
+  }
+</script>
+
+
