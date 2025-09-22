@@ -111,29 +111,67 @@
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .flower-btn.hidden {
-    opacity: 0;
-    transform: scale(0);
-  }
-
   .flower-btn:hover {
     transform: scale(1.1); /* efecto al pasar el ratón */
     box-shadow: 0 6px 12px rgba(0,0,0,0.4);
   }
 </style>
 
+
 <button class="flower-btn">Antes de comenzar, dale a este botón pequeña</button>
+
+<!-- Slideshow oculto -->
+<div id="slideshow" style="display:none;">
+  <img src="foto1.jpg" alt="Foto 1" class="pos1" />
+  <img src="foto2.jpg" alt="Foto 2" class="pos2" />
+  <img src="foto3.jpg" alt="Foto 3" class="pos3" />
+  <img src="foto4.jpg" alt="Foto 4" class="pos4" />
+</div>
+
+<style>
+  #slideshow img {
+    position: fixed;
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    transition: opacity 2.5s ease;
+    z-index: 2000;
+  }
+  .pos1 { top: 20px; left: 20px; }
+  .pos2 { top: 20px; right: 20px; }
+  .pos3 { bottom: 20px; left: 20px; }
+  .pos4 { bottom: 20px; right: 20px; }
+  #slideshow img.active {
+    opacity: 1;
+  }
+</style>
 
 <script>
   const floweBtn = document.querySelector(".flower-btn");
-  const audio = document.getElementById("id_audio")
+  const audio = document.getElementById("id_audio");
+  const slides = document.querySelectorAll("#slideshow img");
+  const slideshow = document.getElementById("slideshow");
+  let currentIndex = 0;
+  let interval;
+
   floweBtn.onclick = () => {
-    audio.play()
-    audio.volume = 1
-  }
+    audio.play();
+    audio.volume = 1;
+    // Mostrar slideshow y empezar animación si no ha empezado
+    slideshow.style.display = "block";
+    if (!interval) {
+      slides[currentIndex].classList.add("active");
+      interval = setInterval(() => {
+        slides[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add("active");
+      }, 4000);
+    }
+  };
 </script>
-
-
 
 <script>
   const correctPassword = "150525"; // puedes cambiar la longitud
